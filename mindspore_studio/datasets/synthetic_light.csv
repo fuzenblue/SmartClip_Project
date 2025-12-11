@@ -1,0 +1,6 @@
+timestamp_ms, adc_value, label
+0,            2048,      normal
+1,            2048,      normal
+100,          4095,      flicker_100hz
+105,          0,         flicker_100hz
+110,          4095,      flicker_100hz
