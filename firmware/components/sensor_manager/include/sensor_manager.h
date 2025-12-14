@@ -6,6 +6,8 @@ typedef struct {
     float* audio_buffer;
     int    audio_len;
     float  light_freq;
+    float  pressure_val;
+    uint32_t voc_val;
 } SensorData_t;
 
 /**

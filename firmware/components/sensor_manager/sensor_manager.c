@@ -76,9 +76,26 @@ SensorData_t read_sensors() {
     #if USE_MOCK_SENSORS == 1
         // --- Mock Mode: Read from Array ---
         static int offset = 0;
+        static int env_idx = 0;
         
         data.audio_buffer = (float*)&MOCK_AUDIO_SAMPLE[offset];
         data.light_freq = 120.0; // Simulated flicker detection
+        
+        // Read Pressure and VOC from mock arrays
+        int pressure_size = sizeof(MOCK_PRESSURE_DROP_SCENARIO)/sizeof(float);
+        int voc_size = sizeof(MOCK_VOC_SPIKE_SCENARIO)/sizeof(uint32_t);
+
+        if (pressure_size > 0) 
+            data.pressure_val = MOCK_PRESSURE_DROP_SCENARIO[env_idx % pressure_size];
+        else 
+            data.pressure_val = 1013.0f;
+
+        if (voc_size > 0)
+            data.voc_val = MOCK_VOC_SPIKE_SCENARIO[env_idx % voc_size];
+        else
+            data.voc_val = 50000;
+
+        env_idx++;
 
         offset += 512;
         if (offset >= sizeof(MOCK_AUDIO_SAMPLE)/sizeof(float)) offset = 0;
