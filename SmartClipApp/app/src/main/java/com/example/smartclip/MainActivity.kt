@@ -29,10 +29,24 @@ class MainActivity : AppCompatActivity() {
     private val bleReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             intent?.let {
-                val type = it.getStringExtra("TYPE") ?: "UNKNOWN"
-                val value = it.getFloatExtra("VALUE", 0f)
-                val timestamp = it.getLongExtra("TIMESTAMP", 0L)
-                updateDashboard(type, value, timestamp)
+                // Handle Real BLE Trigger Events
+                if (it.action == "com.example.smartclip.BLE_TRIGGER_EVENT") {
+                    val type = it.getIntExtra("TYPE", 0)
+                    val severity = it.getIntExtra("SEVERITY", 0)
+                    
+                    val typeName = when(type) {
+                        1 -> "FLICKER_TRIG"
+                        2 -> "AUDIO_TRIG"
+                        else -> "UNKNOWN_TRIG"
+                    }
+                    
+                    updateDashboard(typeName, severity.toFloat(), System.currentTimeMillis())
+                }
+                // Fallback for Mock Data (Optional, if we keep MockService running)
+                else {
+                    val type = it.getStringExtra("TYPE") ?: "DATA"
+                    // ... old logic if needed, but let's prioritize triggers
+                }
             }
         }
     }
@@ -47,29 +61,25 @@ class MainActivity : AppCompatActivity() {
         tvLogConsole = findViewById(R.id.tvLogConsole)
         btnLogSymptom = findViewById(R.id.btnLogSymptom)
 
-        tvLogConsole.text = "" // Clear initial text
+        tvLogConsole.text = "Waiting for BLE Triggers...\n"
 
-        // Start Mock BLE Service
-        val serviceIntent = Intent(this, MockBleService::class.java)
-        startService(serviceIntent)
-
-        // Init AI (JNI)
-        try {
-            pspPredictor.initialize(assets)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
+        // For testing without hardware, we can validly keep MockService running
+        // In production, we would scan and start RealBleService with an address
+        // val serviceIntent = Intent(this, RealBleService::class.java)
+        // serviceIntent.putExtra("DEVICE_ADDRESS", "XX:XX:XX:XX:XX:XX")
+        // startService(serviceIntent)
+        
         // Setup Button
         btnLogSymptom.setOnClickListener {
             Toast.makeText(this, "Logged symptom. AI Model Updating...", Toast.LENGTH_SHORT).show()
-            // In real app, launch LogActivity
         }
     }
 
     override fun onResume() {
         super.onResume()
-        val filter = IntentFilter("com.example.smartclip.BLE_EVENT")
+        val filter = IntentFilter()
+        filter.addAction("com.example.smartclip.BLE_TRIGGER_EVENT") // Real Config
+        // filter.addAction("com.example.smartclip.BLE_EVENT")   // Mock Config (Uncomment if needed)
         LocalBroadcastManager.getInstance(this).registerReceiver(bleReceiver, filter)
     }
 
