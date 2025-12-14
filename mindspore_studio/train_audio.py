@@ -117,6 +117,9 @@ class AudioDataset:
                                     spec = fft_val[:40]
                                 else:
                                     spec = np.pad(fft_val, (0, 40 - len(fft_val)))
+                                
+                                # Log-transform for stability (Log-Spectrogram)
+                                spec = np.log(spec + 1e-6)
                             
                             spectrogram.append(spec)
                         
@@ -186,7 +189,7 @@ def train():
 
     # 3. Loss & Optimizer
     loss_fn = nn.SoftmaxCrossEntropyWithLogits(sparse=True, reduction='mean')
-    optimizer = nn.Adam(network.trainable_params(), learning_rate=0.001)
+    optimizer = nn.Adam(network.trainable_params(), learning_rate=0.0005)
 
     # 4. Train
     model = ms.Model(network, loss_fn=loss_fn, optimizer=optimizer, metrics={'accuracy'})
