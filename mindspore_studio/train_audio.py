@@ -5,6 +5,7 @@ import mindspore.nn as nn
 import mindspore.ops as ops
 from mindspore import context, Tensor
 from mindspore.train.callback import LossMonitor
+import wave
 
 # Configuration
 DATASET_PATH = "./datasets/audio"
@@ -48,8 +49,88 @@ class AudioDataset:
                     self.data.append(feature)
                     self.labels.append(np.int32(idx))
             else:
-                # Real implementation would load wav here
-                pass
+                # Real implementation: Load wav and compute simple Spectrogram/FFT features
+                print(f"Found {len(files)} files in {class_name}. Processing...")
+                for file_name in files:
+                    if not file_name.endswith('.wav'): continue
+                    
+                    file_path = os.path.join(class_path, file_name)
+                    try:
+                        # Load audio using standard libraries (wave)
+                        with wave.open(file_path, 'rb') as wf:
+                            # Verify format
+                            n_channels = wf.getnchannels()
+                            sampwidth = wf.getsampwidth()
+                            framerate = wf.getframerate()
+                            n_frames = wf.getnframes()
+                            
+                            # Read raw bytes
+                            raw_data = wf.readframes(n_frames)
+                            
+                            # Convert to numpy array
+                            if sampwidth == 2:
+                                dtype = np.int16
+                            elif sampwidth == 1:
+                                dtype = np.int8
+                            else:
+                                raise ValueError("Unsupported bit depth")
+                                
+                            y = np.frombuffer(raw_data, dtype=dtype).astype(np.float32)
+                            
+                            # Normalize
+                            if sampwidth == 2:
+                                y /= 32768.0
+                            elif sampwidth == 1:
+                                y = (y - 128) / 128.0
+                                
+                            # Mono conversion
+                            if n_channels > 1:
+                                y = y.reshape(-1, n_channels).mean(axis=1)
+                        
+                        # Resample explanation: Assuming 16k input as per requirement.
+                        # For robustness, we could resample, but for now we skip complex resampling
+                        # and rely on the dataset being correct or simple decimation.
+                                
+                        # Feature Extraction: Short-Time Fourier Transform (STFT) equivalent
+                        # Target Shape: [1, 40, 50] -> 40 frequency bins, 50 time steps
+                        
+                        target_time_steps = 50
+                        hop_length = len(y) // target_time_steps
+                        if hop_length < 1: hop_length = 1
+                        
+                        spectrogram = []
+                        for i in range(target_time_steps):
+                            start = i * hop_length
+                            end = start + hop_length
+                            chunk = y[start:end]
+                            
+                            if len(chunk) < 10:
+                                spec = np.zeros(40)
+                            else:
+                                # Windowing
+                                window = np.hanning(len(chunk))
+                                val = chunk * window
+                                # FFT
+                                fft_val = np.abs(np.fft.rfft(val))
+                                # Take first 40 bins (Low frequency focus)
+                                if len(fft_val) >= 40:
+                                    spec = fft_val[:40]
+                                else:
+                                    spec = np.pad(fft_val, (0, 40 - len(fft_val)))
+                            
+                            spectrogram.append(spec)
+                        
+                        # Convert to array [50, 40]
+                        spectrogram = np.array(spectrogram).T # -> [40, 50]
+                        
+                        # Add channel dimension [1, 40, 50]
+                        feature = spectrogram[np.newaxis, ...].astype(np.float32)
+                        
+                        self.data.append(feature)
+                        self.labels.append(np.int32(idx))
+                        
+                    except Exception as e:
+                        print(f"Error processing {file_name}: {e}")
 
     def __getitem__(self, index):
         return self.data[index], self.labels[index]
