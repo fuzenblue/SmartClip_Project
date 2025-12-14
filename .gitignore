@@ -4,3 +4,5 @@ build/
 *.ms
 __pycache__/
 *.pkl
+
+*.venv
