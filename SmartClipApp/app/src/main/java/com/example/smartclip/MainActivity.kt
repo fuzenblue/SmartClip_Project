@@ -42,10 +42,23 @@ class MainActivity : AppCompatActivity() {
                     
                     updateDashboard(typeName, severity.toFloat(), System.currentTimeMillis())
                 }
-                // Fallback for Mock Data (Optional, if we keep MockService running)
+                // Fallback for Mock Data
                 else {
-                    val type = it.getStringExtra("TYPE") ?: "DATA"
-                    // ... old logic if needed, but let's prioritize triggers
+                    val vocSlope = it.getFloatExtra("VOC_SLOPE", 0f)
+                    val flicker = it.getFloatExtra("FLICKER_INDEX", 0f)
+                    
+                    // Simulate a trigger if thresholds are met (Mock Logic)
+                    if (vocSlope > 10.0f) {
+                        updateDashboard("MOCK_VOC_SPIKE", vocSlope, System.currentTimeMillis())
+                    } else if (flicker > 0.1f) {
+                         updateDashboard("MOCK_FLICKER", flicker * 1000, System.currentTimeMillis())
+                    } else {
+                        // Show heartbeat every now and then so user knows it's alive
+                        if (System.currentTimeMillis() % 1000 < 200) { 
+                             // updateDashboard("SCANNING", 0f, System.currentTimeMillis()) 
+                             // Updating UI too fast makes it unreadable, let's stick to triggers
+                        }
+                    }
                 }
             }
         }
@@ -63,11 +76,9 @@ class MainActivity : AppCompatActivity() {
 
         tvLogConsole.text = "Waiting for BLE Triggers...\n"
 
-        // For testing without hardware, we can validly keep MockService running
-        // In production, we would scan and start RealBleService with an address
-        // val serviceIntent = Intent(this, RealBleService::class.java)
-        // serviceIntent.putExtra("DEVICE_ADDRESS", "XX:XX:XX:XX:XX:XX")
-        // startService(serviceIntent)
+        // Start Mock Service for testing
+        val mockServiceIntent = Intent(this, MockBleService::class.java)
+        startService(mockServiceIntent)
         
         // Setup Button
         btnLogSymptom.setOnClickListener {
@@ -79,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         val filter = IntentFilter()
         filter.addAction("com.example.smartclip.BLE_TRIGGER_EVENT") // Real Config
-        // filter.addAction("com.example.smartclip.BLE_EVENT")   // Mock Config (Uncomment if needed)
+        filter.addAction("com.example.smartclip.BLE_EVENT")   // Mock Config
         LocalBroadcastManager.getInstance(this).registerReceiver(bleReceiver, filter)
     }
 

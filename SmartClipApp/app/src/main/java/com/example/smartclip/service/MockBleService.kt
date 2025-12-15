@@ -30,23 +30,27 @@ class MockBleService : Service() {
     }
 
     private fun startMockingData() {
-        // Schedule task every 1 second
+        // Schedule task every 500ms for faster updates
         timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
                 // Simulate pressure dropping occasionally
                 if (Random.nextBoolean()) currentPressure -= 0.1f
+                
+                // FORCE DYNAMIC VALUES FOR DEMO
+                val randomFlicker = Random.nextFloat() * 5f
+                val randomVoc = if (Random.nextBoolean()) 20.0f else 0.5f
 
                 val vector = FeatureVector(
                     timestamp = System.currentTimeMillis(),
-                    pressureSlope = -0.1f, // Slope is negative indicating drop
-                    vocSlope = if (Random.nextInt(100) > 90) 50.0f else 0.5f, // 10% chance of VOC Spike
+                    pressureSlope = -0.1f,
+                    vocSlope = randomVoc,
                     audio400HzEnergy = Random.nextFloat() * 10,
-                    flickerIndex = 0.02f, // Low flicker usually
+                    flickerIndex = randomFlicker, 
                     heatStressIndex = 28.0f
                 )
                 broadcastEvent(vector)
             }
-        }, 0, 1000)
+        }, 0, 500)
     }
 
     private fun broadcastEvent(vector: FeatureVector) {
