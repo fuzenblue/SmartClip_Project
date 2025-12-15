@@ -1,4 +1,0 @@
-timestamp, audio_trigger_count, flicker_detected, voc_spike_count, user_feedback
-2025-12-11 08:00, 5, 0, 0, 0
-2025-12-11 09:00, 12, 1, 0, 1
-2025-12-11 10:00, 40, 1, 2, 2

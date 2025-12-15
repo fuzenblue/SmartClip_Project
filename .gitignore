@@ -1,8 +1,41 @@
-datasets/
+# OS
+.DS_Store
+Thumbs.db
+
+# Android - Build
+.gradle/
 build/
+**/build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Android - Local Configuration
+local.properties
+.idea/
+*.iml
+*.ids
+
+# Android - Outputs
+*.apk
+*.ap_
+*.aab
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv
+venv/
+env/
+.env
+
+# MindSpore / AI Models
 *.mindir
 *.ms
-__pycache__/
 *.pkl
+*.tflite
+*.onnx
 
-*.venv
+# Data
+datasets/
