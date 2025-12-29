@@ -7,4 +7,28 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Project Colors (Elegant Dark Mode - Keeping for reference, but overriding for new design) -->
+    <color name="bg_dark">#121212</color>
+    <color name="bg_surface">#1E1E1E</color>
+    
+    <!-- New Design (Light Medical Theme) -->
+    <color name="design_bg">#F8F9FB</color>
+    <color name="design_header_bg">#E6E9F8</color>
+    <color name="design_card_light">#EAEBED</color>
+    <color name="design_card_dark">#6D7C90</color>
+    <color name="design_text_dark">#1A1C29</color>
+    <color name="design_text_light">#FFFFFF</color>
+    <color name="design_accent_red">#FF6B6B</color>
+    <color name="design_accent_orange">#F9A825</color>
+    <color name="design_gauge_track">#2D3A4B</color>
+
+    <color name="text_primary">#E0E0E0</color>
+    <color name="text_secondary">#B0B0B0</color>
+    
+    <color name="status_safe">#00E676</color> <!-- Bright Green -->
+    <color name="status_danger">#FF1744</color> <!-- Vibrant Red -->
+    <color name="status_warning">#FFC400</color> <!-- Amber -->
+    
+    <color name="accent_blue">#2979FF</color>
 </resources>

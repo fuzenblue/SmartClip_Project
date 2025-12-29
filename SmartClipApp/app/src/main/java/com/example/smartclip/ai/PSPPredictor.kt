@@ -6,8 +6,15 @@ class PSPPredictor {
 
     // Load native library
     companion object {
+        var isNativeLoaded = false
         init {
-            System.loadLibrary("native-lib")
+            try {
+                System.loadLibrary("native-lib")
+                isNativeLoaded = true
+            } catch (e: Throwable) {
+                // Library failed to load
+                isNativeLoaded = false
+            }
         }
     }
 
@@ -18,11 +25,13 @@ class PSPPredictor {
     external fun runInference(modelHandle: Long, features: FloatArray): Float
 
     fun initialize(assets: AssetManager) {
-        modelHandle = initModel(assets, "psp_model.ms")
+        if (isNativeLoaded) {
+            modelHandle = initModel(assets, "psp_model.ms")
+        }
     }
 
     fun predictOutcome(features: FloatArray): Float {
-        if (modelHandle == 0L) return 0.0f
+        if (!isNativeLoaded || modelHandle == 0L) return 0.0f
         return runInference(modelHandle, features)
     }
 }

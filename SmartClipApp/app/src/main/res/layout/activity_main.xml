@@ -1,132 +1,515 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@color/bg_dark"
     tools:context=".MainActivity">
 
-    <!-- Header Section -->
-    <TextView
-        android:id="@+id/tvHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Smart Clip"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#333333"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <!-- ========================================= -->
+    <!-- STAGE 1 & 2: DASHBOARD (New Light Design) -->
+    <!-- ========================================= -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutDashboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F8FF">
 
-    <!-- Connection Status -->
-    <TextView
-        android:id="@+id/tvConnectionStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="● Connected"
-        android:textColor="#4CAF50"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/tvHeader"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Risk Score Gauge (Card) -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardRisk"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tvConnectionStatus"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
+        <!-- Top Header: Date Strip & Toggle -->
         <LinearLayout
+            android:id="@+id/headerContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:padding="24dp">
-
-            <TextView
-                android:layout_width="wrap_content"
+            android:padding="24dp"
+            app:layout_constraintTop_toTopOf="parent">
+            
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Current Risk Score"
-                android:textColor="#757575"
-                android:textSize="14sp" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                
+                <TextView
+                    android:id="@+id/tvGreeting"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Today"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="#192038"/>
+                    
+                <!-- Toggle Stub -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_card_light"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Day"
+                        android:gravity="center"
+                        android:paddingHorizontal="12dp"
+                        android:textStyle="bold"
+                        android:background="@drawable/bg_rounded_white"/>
+                    <TextView
+                         android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                         android:text="Week"
+                        android:gravity="center"
+                         android:paddingHorizontal="12dp"
+                         android:textColor="#888"/>
+                </LinearLayout>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvRiskScore"
-                android:layout_width="wrap_content"
+            <!-- Date Strip Stub (Icons) -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Low"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                android:textColor="#4CAF50"
-                android:layout_marginTop="8dp" />
-
-            <TextView
-                android:id="@+id/tvRiskValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="15%"
-                android:textSize="18sp"
-                android:textColor="#333333" />
-
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:gravity="center">
+                <!-- Using text for simplicity in this pass -->
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="16" android:gravity="center" android:textColor="#888"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="17" android:gravity="center" android:textColor="#888"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="18" android:gravity="center" android:textColor="#888"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="19" android:gravity="center" android:textColor="#888"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="20" android:gravity="center" android:textColor="#888"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="21" android:gravity="center" android:textColor="#888"/>
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="22" android:gravity="center" android:textColor="@color/white" android:background="@drawable/ic_launcher_blue"/>
+            </LinearLayout>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
-    <!-- Recent Triggers Section -->
-    <TextView
-        android:id="@+id/tvTriggersLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recent Triggers"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#333333"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/cardRisk"
-        app:layout_constraintStart_toStartOf="parent" />
+        <!-- Scrollable Content -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/headerContainer"
+            app:layout_constraintBottom_toTopOf="@id/bottomNavigation">
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginHorizontal="16dp"
-        android:background="@drawable/bg_rounded_white"
-        app:layout_constraintTop_toBottomOf="@id/tvTriggersLabel"
-        app:layout_constraintBottom_toTopOf="@id/btnLogSymptom"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+                <!-- Risk Gauge Card (Centered) -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="24dp">
+                    
+                     <ProgressBar
+                        android:id="@+id/progressRisk"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="220dp"
+                        android:layout_height="220dp"
+                        android:indeterminate="false"
+                        android:max="100"
+                        android:progress="64"
+                        android:progressDrawable="@drawable/gauge_progress_red"
+                        android:rotation="90" 
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/tvLogConsole"
+                     <LinearLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:orientation="vertical"
+                         android:gravity="center"
+                         app:layout_constraintStart_toStartOf="@id/progressRisk"
+                         app:layout_constraintEnd_toEndOf="@id/progressRisk"
+                         app:layout_constraintTop_toTopOf="@id/progressRisk"
+                         app:layout_constraintBottom_toBottomOf="@id/progressRisk">
+                         
+                         <TextView
+                            android:id="@+id/tvGaugeValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="64%"
+                            android:textSize="48sp"
+                            android:textStyle="bold"
+                            android:textColor="#192038"/>
+                            
+                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Perfect Day"
+                            android:textColor="#888"/>
+                     </LinearLayout>
+                     
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Cheer up! Your light/sound exposure is OK."
+                         android:gravity="center"
+                         android:layout_marginTop="16dp"
+                         android:textColor="#666"
+                         app:layout_constraintTop_toBottomOf="@id/progressRisk"
+                         app:layout_constraintStart_toStartOf="parent"
+                         app:layout_constraintEnd_toEndOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Action Button (Moved Up) -->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnFAB"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="I have a headache"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/btn_pill_orange"
+                    android:backgroundTint="#FF6B6B"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="24dp"/>
+
+                <!-- Sensor Cards Grid -->
+                <!-- Sound -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/white">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="16dp">
+                        <ImageView
+                             android:layout_width="40dp"
+                             android:layout_height="40dp"
+                             android:src="@drawable/ic_avatar"
+                             android:backgroundTint="#4CAF50"/> <!-- Mock Icon -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp">
+                             <TextView android:text="SOUND LEVEL" android:textSize="10sp" android:textColor="#888" android:textStyle="bold"/>
+                             <TextView android:id="@+id/tvSoundVal" android:text="80 dB" android:textSize="18sp" android:textStyle="bold" android:textColor="#333"/>
+                        </LinearLayout>
+                        <ProgressBar
+                            android:layout_width="0dp"
+                            android:layout_height="6dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:progress="80"
+                            android:progressTint="#4CAF50"
+                            style="@android:style/Widget.ProgressBar.Horizontal"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Light -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/white"
+                        android:layout_marginEnd="8dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="16dp"
+                            android:gravity="center_vertical">
+                            <TextView android:id="@+id/tvLightVal" android:text="650" android:textSize="24sp" android:textStyle="bold" android:textColor="#333"/>
+                            <TextView android:text="Lumens" android:textColor="#888"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/white"
+                        android:layout_marginStart="8dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="16dp"
+                            android:gravity="center_vertical">
+                             <TextView android:id="@+id/tvAirVal" android:text="High" android:textSize="24sp" android:textStyle="bold" android:textColor="#FF6B6B"/>
+                            <TextView android:text="Risk" android:textColor="#888"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <!-- Hidden Demo Button -->
+                 <Button
+                    android:id="@+id/btnDemoTrigger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Demo Trigger"
+                    android:alpha="0.0"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- Bottom Navigation -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="Waiting for data..."
-            android:fontFamily="monospace"
-            android:textSize="12sp"
-            android:textColor="#555555" />
-    </ScrollView>
+            android:background="@color/white"
+            app:menu="@menu/bottom_nav"
+            app:labelVisibilityMode="labeled"
+            app:itemIconTint="#2979FF"
+            app:itemTextColor="#2979FF"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <!-- Footer Action -->
-    <Button
-        android:id="@+id/btnLogSymptom"
+        <!-- Keep Alert Card Logic (Hidden but present for overlay if needed) -->
+         <androidx.cardview.widget.CardView
+            android:id="@+id/cardAlert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardBackgroundColor="@color/status_danger"
+            app:cardCornerRadius="16dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <!-- Simplified alert content for transition -->
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="20dp"
+                 android:text="⚠️ CRITICAL ALERT OVERLAY" 
+                 android:textColor="@color/white"
+                 android:textStyle="bold"/>
+         </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- ========================================= -->
+    <!-- STAGE 3: SYMPTOM LOG MODAL (Overlay)      -->
+    <!-- ========================================= -->
+    <FrameLayout
+        android:id="@+id/layoutSymptomModal"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="I'm Feeling Unwell"
-        android:layout_margin="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_height="match_parent"
+        android:background="#AA000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="24dp"
+            app:cardBackgroundColor="@color/bg_surface"
+            app:cardCornerRadius="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="32dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Log Symptoms"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Pain Level: 7"
+                    android:id="@+id/tvPainLevel"
+                    android:textColor="@color/status_warning"/>
+
+                <SeekBar
+                    android:id="@+id/seekBarPain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:progress="7"
+                    android:max="10"
+                    android:progressTint="@color/status_warning"
+                    android:thumbTint="@color/status_warning"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Potential Triggers (AI Detected)"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"/>
+                
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Light Sensitivity"
+                    android:checked="true"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/accent_blue"/>
+                
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nausea"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/text_secondary"/>
+
+                <Button
+                    android:id="@+id/btnSaveRecord"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Save Record"
+                    android:backgroundTint="@color/accent_blue"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+
+
+    <!-- ========================================= -->
+    <!-- STAGE 4: SYNCING STATE                    -->
+    <!-- ========================================= -->
+    <LinearLayout
+        android:id="@+id/layoutSyncing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_dark"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ProgressBar
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:indeterminateTint="@color/accent_blue"/>
+        
+        <TextView
+            android:id="@+id/tvSyncStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Uploading Data..."
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+
+    <!-- ========================================= -->
+    <!-- STAGE 5: INSIGHT DASHBOARD                -->
+    <!-- ========================================= -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutInsights"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_dark"
+        android:padding="24dp"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:id="@+id/tvInsightTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Health Insights"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <!-- Graph Placeholder -->
+        <View
+            android:id="@+id/viewGraph"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/graph_placeholder" 
+            android:backgroundTint="#333"
+            app:layout_constraintTop_toBottomOf="@id/tvInsightTitle"/>
+        <!-- Note: Using placeholder drawable as I can't generate complex drawables easily without adding files -->
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Graph Visualization)"
+            android:textColor="@color/text_secondary"
+            app:layout_constraintStart_toStartOf="@id/viewGraph"
+            app:layout_constraintEnd_toEndOf="@id/viewGraph"
+            app:layout_constraintTop_toTopOf="@id/viewGraph"
+            app:layout_constraintBottom_toBottomOf="@id/viewGraph"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:cardBackgroundColor="#2C2C2C"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintTop_toBottomOf="@id/viewGraph">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AI Discovery"
+                    android:textColor="@color/accent_blue"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You are highly sensitive to 100Hz Flicker but resilient to Loud Noise."
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Next time, I will alert you sooner for lights, but ignore traffic noise."
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        
+         <Button
+            android:id="@+id/btnReset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back to Dashboard"
+            android:backgroundTint="@color/bg_surface"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

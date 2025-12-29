@@ -49,4 +49,6 @@ dependencies {
     
     // MindSpore Lite (Assuming local AAR or maven)
     // implementation 'com.huawei.hms:mindspore-lite:2.2.0'
+    
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
 }
