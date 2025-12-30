@@ -17,72 +17,94 @@
         android:layout_height="match_parent"
         android:background="#F5F8FF">
 
-        <!-- Top Header: Date Strip & Toggle -->
-        <LinearLayout
+        <!-- Top Header: User Profile & Status -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/headerContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:padding="24dp"
             app:layout_constraintTop_toTopOf="parent">
             
+            <ImageView
+                android:id="@+id/imgUserAvatar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_avatar" 
+                android:background="@drawable/bg_rounded_white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                
+                android:orientation="vertical"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toEndOf="@id/imgUserAvatar"
+                app:layout_constraintTop_toTopOf="@id/imgUserAvatar"
+                app:layout_constraintBottom_toBottomOf="@id/imgUserAvatar">
+
                 <TextView
-                    android:id="@+id/tvGreeting"
-                    android:layout_width="0dp"
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Today"
-                    android:textSize="28sp"
+                    android:text="Hi, Yufa"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="#192038"/>
-                    
-                <!-- Toggle Stub -->
+
                 <LinearLayout
+                    android:id="@+id/layoutConnectedStatus"
                     android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:background="@drawable/bg_card_light"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="4dp"
+                    android:visibility="gone">
+                    
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Day"
-                        android:gravity="center"
-                        android:paddingHorizontal="12dp"
-                        android:textStyle="bold"
-                        android:background="@drawable/bg_rounded_white"/>
-                    <TextView
-                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                         android:text="Week"
-                        android:gravity="center"
-                         android:paddingHorizontal="12dp"
-                         android:textColor="#888"/>
+                        android:layout_height="wrap_content"
+                        android:text="Smart Clip Connected"
+                        android:textSize="12sp"
+                        android:textColor="#4CAF50"/>
+                        
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/shape_circle_green"
+                        android:backgroundTint="#4CAF50"/>
                 </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnConnect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/bg_rounded_white"
+                    android:backgroundTint="#EEEEEE"
+                    android:text="Connect"
+                    android:textAllCaps="false"
+                    android:textColor="#333"
+                    android:paddingHorizontal="12dp"
+                    android:textSize="12sp"/>
             </LinearLayout>
 
-            <!-- Date Strip Stub (Icons) -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="16dp"
-                android:gravity="center">
-                <!-- Using text for simplicity in this pass -->
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="16" android:gravity="center" android:textColor="#888"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="17" android:gravity="center" android:textColor="#888"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="18" android:gravity="center" android:textColor="#888"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="19" android:gravity="center" android:textColor="#888"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="20" android:gravity="center" android:textColor="#888"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="21" android:gravity="center" android:textColor="#888"/>
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="22" android:gravity="center" android:textColor="@color/white" android:background="@drawable/ic_launcher_blue"/>
-            </LinearLayout>
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Notification Bell (Replaces search) -->
+        <ImageView
+             android:layout_width="24dp"
+             android:layout_height="24dp"
+             android:src="@drawable/ic_avatar"
+             android:backgroundTint="#FF5252"
+             app:tint="#192038"
+             android:layout_marginEnd="24dp"
+             android:layout_marginTop="36dp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent"/>
+             <!-- Note: Using plain icon for simplified bell representation -->
 
         <!-- Scrollable Content -->
         <ScrollView
@@ -110,12 +132,25 @@
                         android:layout_height="220dp"
                         android:indeterminate="false"
                         android:max="100"
-                        android:progress="64"
+                        android:progress="85"
                         android:progressDrawable="@drawable/gauge_progress_red"
                         android:rotation="90" 
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
+                     
+                     <!-- Blue Circle Background for Gauge (Visual Pop) -->
+                     <View
+                         android:layout_width="200dp"
+                         android:layout_height="200dp"
+                         android:background="@drawable/shape_circle_green"
+                         android:backgroundTint="#448AFF"
+                         android:alpha="1"
+                         app:layout_constraintStart_toStartOf="@id/progressRisk"
+                         app:layout_constraintEnd_toEndOf="@id/progressRisk"
+                         app:layout_constraintTop_toTopOf="@id/progressRisk"
+                         app:layout_constraintBottom_toBottomOf="@id/progressRisk"/>
+                        <!-- Re-using circle shape but tinting blue for the 'filled' look behind text -->
 
                      <LinearLayout
                          android:layout_width="wrap_content"
@@ -131,16 +166,19 @@
                             android:id="@+id/tvGaugeValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="64%"
-                            android:textSize="48sp"
+                            android:text="85%"
+                            android:textSize="56sp"
                             android:textStyle="bold"
-                            android:textColor="#192038"/>
+                            android:textColor="@color/white"
+                            android:elevation="4dp"/>
                             
                          <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Perfect Day"
-                            android:textColor="#888"/>
+                            android:text="Risk Level"
+                            android:textColor="#EEF"
+                            android:textSize="14sp"
+                            android:elevation="4dp"/>
                      </LinearLayout>
                      
                      <TextView
@@ -169,40 +207,58 @@
                     android:textColor="@color/white"
                     android:layout_marginBottom="24dp"/>
 
+                <!-- Section Title: Environment -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Environment"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#192038"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See More"
+                        android:textColor="#448AFF"/>
+                </LinearLayout>
+
                 <!-- Sensor Cards Grid -->
                 <!-- Sound -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginBottom="16dp"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="0dp"
-                    app:cardBackgroundColor="@color/white">
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:padding="16dp">
-                        <ImageView
-                             android:layout_width="40dp"
-                             android:layout_height="40dp"
-                             android:src="@drawable/ic_avatar"
-                             android:backgroundTint="#4CAF50"/> <!-- Mock Icon -->
+                        android:padding="16dp"
+                        android:background="@drawable/bg_card_pastel">
+                        <!-- Icon Removed -->
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_marginStart="16dp">
-                             <TextView android:text="SOUND LEVEL" android:textSize="10sp" android:textColor="#888" android:textStyle="bold"/>
-                             <TextView android:id="@+id/tvSoundVal" android:text="80 dB" android:textSize="18sp" android:textStyle="bold" android:textColor="#333"/>
+                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SOUND LEVEL" android:textSize="10sp" android:textColor="#888" android:textStyle="bold"/>
+                             <TextView android:id="@+id/tvSoundVal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-- dB" android:textSize="18sp" android:textStyle="bold" android:textColor="#333"/>
                         </LinearLayout>
                         <ProgressBar
+                            android:id="@+id/progressSound"
                             android:layout_width="0dp"
                             android:layout_height="6dp"
                             android:layout_weight="1"
                             android:layout_marginStart="16dp"
-                            android:progress="80"
-                            android:progressTint="#4CAF50"
+                            android:progress="0"
                             style="@android:style/Widget.ProgressBar.Horizontal"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -217,18 +273,17 @@
                         android:layout_width="0dp"
                         android:layout_height="120dp"
                         android:layout_weight="1"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="0dp"
-                        app:cardBackgroundColor="@color/white"
-                        android:layout_marginEnd="8dp">
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="0dp">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
                             android:padding="16dp"
-                            android:gravity="center_vertical">
-                            <TextView android:id="@+id/tvLightVal" android:text="650" android:textSize="24sp" android:textStyle="bold" android:textColor="#333"/>
-                            <TextView android:text="Lumens" android:textColor="#888"/>
+                            android:gravity="center_vertical"
+                            android:background="@drawable/bg_card_pastel">
+                            <TextView android:id="@+id/tvLightVal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="650" android:textSize="24sp" android:textStyle="bold" android:textColor="#333"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lumens" android:textColor="#888"/>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                     
@@ -236,21 +291,78 @@
                         android:layout_width="0dp"
                         android:layout_height="120dp"
                         android:layout_weight="1"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="0dp"
-                        app:cardBackgroundColor="@color/white"
-                        android:layout_marginStart="8dp">
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="0dp">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
                             android:padding="16dp"
-                            android:gravity="center_vertical">
-                             <TextView android:id="@+id/tvAirVal" android:text="High" android:textSize="24sp" android:textStyle="bold" android:textColor="#FF6B6B"/>
-                            <TextView android:text="Risk" android:textColor="#888"/>
+                            android:gravity="center_vertical"
+                            android:background="@drawable/bg_card_pastel">
+                             <TextView android:id="@+id/tvAirVal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="High" android:textSize="24sp" android:textStyle="bold" android:textColor="#FF6B6B"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Risk" android:textColor="#888"/>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
+
+                <!-- Temperature Card (New) -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="16dp"
+                        android:background="@drawable/bg_card_pastel">
+                        <!-- Icon Removed -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp">
+                             <TextView 
+                                android:layout_width="wrap_content" 
+                                android:layout_height="wrap_content"
+                                android:text="TEMPERATURE" 
+                                android:textSize="10sp" 
+                                android:textColor="#888" 
+                                android:textStyle="bold"/>
+                             <TextView 
+                                android:id="@+id/tvTempVal" 
+                                android:layout_width="wrap_content" 
+                                android:layout_height="wrap_content" 
+                                android:text="-- °C" 
+                                android:textSize="18sp" 
+                                android:textStyle="bold" 
+                                android:textColor="#333"/>
+                        </LinearLayout>
+                        <ProgressBar
+                            android:layout_width="0dp"
+                            android:layout_height="6dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
+                            android:progress="60"
+                            android:progressTint="#FF9800"
+                            style="@android:style/Widget.ProgressBar.Horizontal"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Cloud Update Button -->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnUpdateModel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Check for Model Updates"
+                    android:background="@drawable/bg_nav_pill_floating"
+                    android:backgroundTint="#E0E0E0"
+                    android:textColor="#333"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="60dp"/>
 
                 <!-- Hidden Demo Button -->
                  <Button
@@ -263,17 +375,45 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- Bottom Navigation -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+        <!-- Custom Floating Navigation -->
+        <LinearLayout
             android:id="@+id/bottomNavigation"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:menu="@menu/bottom_nav"
-            app:labelVisibilityMode="labeled"
-            app:itemIconTint="#2979FF"
-            app:itemTextColor="#2979FF"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:background="@drawable/bg_nav_pill_floating"
+            android:orientation="horizontal"
+            android:padding="4dp"
+            android:elevation="8dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Home (Active) -->
+            <LinearLayout
+                android:id="@+id/navHome"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_nav_item_selected"
+                android:paddingHorizontal="20dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                 android:orientation="horizontal">
+                 <ImageView android:id="@+id/navHomeIcon" android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_launcher_blue" app:tint="@color/white"/>
+                 <TextView android:id="@+id/navHomeText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Home" android:textColor="@color/white" android:textStyle="bold" android:layout_marginStart="8dp"/>
+            </LinearLayout>
+            
+            <!-- History -->
+            <ImageView android:id="@+id/navHistory" android:layout_width="48dp" android:layout_height="48dp" android:padding="12dp" android:src="@android:drawable/ic_menu_recent_history" app:tint="#AAA"/>
+            
+            <!-- Insight -->
+            <ImageView android:id="@+id/navInsight" android:layout_width="48dp" android:layout_height="48dp" android:padding="12dp" android:src="@android:drawable/ic_menu_info_details" app:tint="#AAA"/>
+            
+            <!-- Profile -->
+            <ImageView android:id="@+id/navProfile" android:layout_width="48dp" android:layout_height="48dp" android:padding="12dp" android:src="@android:drawable/ic_menu_my_calendar" app:tint="#AAA"/>
+            
+        </LinearLayout>
 
         <!-- Keep Alert Card Logic (Hidden but present for overlay if needed) -->
          <androidx.cardview.widget.CardView
@@ -370,6 +510,34 @@
                 <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="Loud Noise"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/text_secondary"/>
+
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="100Hz Flicker"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/text_secondary"/>
+
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Heat Stress"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/text_secondary"/>
+
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bad Air Quality (VOC)"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/text_secondary"/>
+                
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Nausea"
                     android:textColor="@color/white"
                     android:buttonTint="@color/text_secondary"/>
@@ -423,7 +591,7 @@
         android:id="@+id/layoutInsights"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_dark"
+        android:background="#F9F9F9"
         android:padding="24dp"
         android:visibility="gone"
         android:clickable="true"
@@ -434,73 +602,136 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Health Insights"
-            android:textColor="@color/white"
+            android:textColor="@color/design_text_dark"
             android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <!-- Graph Placeholder -->
-        <View
-            android:id="@+id/viewGraph"
+        <!-- Radar Chart Section -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutRadar"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/graph_placeholder" 
-            android:backgroundTint="#333"
-            app:layout_constraintTop_toBottomOf="@id/tvInsightTitle"/>
-        <!-- Note: Using placeholder drawable as I can't generate complex drawables easily without adding files -->
-        
+            android:layout_height="300dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/tvInsightTitle">
+            
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_radar_chart"
+                android:padding="24dp"/>
+                
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="58"
+                android:textSize="48sp"
+                android:textColor="@color/design_text_dark"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+                
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/100"
+                android:textColor="#666666"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toEndOf="@id/layoutRadar" 
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" 
+                app:layout_constraintBottom_toBottomOf="parent"/> 
+            <!-- Labels for Radar Chart -->
+            <TextView android:text="Flicker" android:textColor="#444" android:textSize="10sp" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="0dp"/>
+            <TextView android:text="Light" android:textColor="#444" android:textSize="10sp" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="24dp" android:id="@+id/lblLight"/>
+            <TextView android:text="Noise" android:textColor="#444" android:textSize="10sp" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="40dp" android:layout_marginEnd="40dp"/>
+
+            <TextView android:text="VOC" android:textColor="#444" android:textSize="10sp" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="40dp" android:layout_marginStart="40dp"/>
+            <TextView android:text="Heat" android:textColor="#444" android:textSize="10sp" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"/>
+
+            
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Vertical Statistics Section -->
         <TextView
+            android:id="@+id/tvStatsTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(Graph Visualization)"
-            android:textColor="@color/text_secondary"
-            app:layout_constraintStart_toStartOf="@id/viewGraph"
-            app:layout_constraintEnd_toEndOf="@id/viewGraph"
-            app:layout_constraintTop_toTopOf="@id/viewGraph"
-            app:layout_constraintBottom_toBottomOf="@id/viewGraph"/>
+            android:text="Trigger History"
+            android:textColor="@color/design_text_dark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/layoutRadar"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-        <androidx.cardview.widget.CardView
+        <!-- History List Section -->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            app:cardBackgroundColor="#2C2C2C"
-            app:cardCornerRadius="16dp"
-            app:layout_constraintTop_toBottomOf="@id/viewGraph">
-
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tvStatsTitle"
+            app:layout_constraintBottom_toTopOf="@id/btnReset">
+            
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="24dp">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Item 1: Flicker -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="AI Discovery"
-                    android:textColor="@color/accent_blue"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="8dp"/>
-                
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="You are highly sensitive to 100Hz Flicker but resilient to Loud Noise."
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingVertical="12dp"
+                    android:background="@drawable/bg_bottom_border_faint">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp" android:src="@drawable/bg_rounded_white" android:padding="8dp" android:backgroundTint="#EEE" android:tint="#333"/>
+                    <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginStart="16dp">
+                        <TextView android:text="100Hz Flicker" android:textColor="@color/design_text_dark" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:text="Main Trigger (12 Events)" android:textColor="#666" android:textSize="12sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <TextView android:text="60%" android:textColor="#FBC02D" android:textStyle="bold" android:textSize="18sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Item 2: Light -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Next time, I will alert you sooner for lights, but ignore traffic noise."
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp"/>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingVertical="12dp"
+                    android:background="@drawable/bg_bottom_border_faint">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp" android:src="@drawable/bg_rounded_white" android:padding="8dp" android:backgroundTint="#EEE" android:tint="#333"/>
+                    <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginStart="16dp">
+                        <TextView android:text="Bright Light" android:textColor="@color/design_text_dark" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:text="Moderate Trigger (5 Events)" android:textColor="#666" android:textSize="12sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <TextView android:text="40%" android:textColor="#FBC02D" android:textStyle="bold" android:textSize="18sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <!-- Item 3: Noise -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingVertical="12dp"
+                    android:background="@drawable/bg_bottom_border_faint">
+                    <ImageView android:layout_width="40dp" android:layout_height="40dp" android:src="@drawable/bg_rounded_white" android:padding="8dp" android:backgroundTint="#EEE" android:tint="#333"/>
+                    <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginStart="16dp">
+                        <TextView android:text="Loud Noise" android:textColor="@color/design_text_dark" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:text="Low Trigger (2 Events)" android:textColor="#666" android:textSize="12sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <TextView android:text="20%" android:textColor="#FBC02D" android:textStyle="bold" android:textSize="18sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                </LinearLayout>
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </ScrollView>
         
          <Button
             android:id="@+id/btnReset"

@@ -1,0 +1,40 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="300dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <!-- Grid Spider Web -->
+    <path
+        android:pathData="M50,10 L90,30 L90,70 L50,90 L10,70 L10,30 Z"
+        android:strokeColor="#E0E0E0"
+        android:strokeWidth="0.5"
+        android:fillColor="#00000000"/>
+    <path
+        android:pathData="M50,30 L70,40 L70,60 L50,70 L30,60 L30,40 Z"
+        android:strokeColor="#E0E0E0"
+        android:strokeWidth="0.5"
+        android:fillColor="#00000000"/>
+    
+    <!-- Axis Lines -->
+    <path android:pathData="M50,50 L50,10" android:strokeColor="#E0E0E0" android:strokeWidth="0.5"/>
+    <path android:pathData="M50,50 L90,30" android:strokeColor="#E0E0E0" android:strokeWidth="0.5"/>
+    <path android:pathData="M50,50 L90,70" android:strokeColor="#E0E0E0" android:strokeWidth="0.5"/>
+    <path android:pathData="M50,50 L50,90" android:strokeColor="#E0E0E0" android:strokeWidth="0.5"/>
+    <path android:pathData="M50,50 L10,70" android:strokeColor="#E0E0E0" android:strokeWidth="0.5"/>
+    <path android:pathData="M50,50 L10,30" android:strokeColor="#E0E0E0" android:strokeWidth="0.5"/>
+
+    <!-- Data Shape 1 (History/Base) - Yellowish -->
+    <path
+        android:pathData="M50,20 L80,35 L75,65 L50,80 L20,65 L25,35 Z"
+        android:fillColor="#33FFCA28"
+        android:strokeColor="#FFCA28"
+        android:strokeWidth="1.5"/>
+        
+    <!-- Data Shape 2 (Current) - Greenish -->
+    <path
+        android:pathData="M50,15 L70,45 L85,60 L50,75 L35,60 L15,45 Z"
+        android:fillColor="#3366BB6A"
+        android:strokeColor="#66BB6A"
+        android:strokeWidth="1.5"/>
+
+</vector>
